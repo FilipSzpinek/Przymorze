@@ -1,0 +1,20 @@
+html, body {
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.all {
+    margin-left: 200px;
+    margin-right: 200px;
+    text-align: center;
+}
+
+.a {
+    background-color: #33FFFF
+}
+
+.b {
+    background-color: #C0C0C0
+}

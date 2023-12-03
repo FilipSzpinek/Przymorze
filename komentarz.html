@@ -1,0 +1,80 @@
+<! – ©Copyright Filip Szpinek –>
+
+			
+			
+			
+			
+			
+			
+			
+				
+				
+				
+				<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl"><head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+
+<title>Księga gości</title>
+</head><body>
+<br><br><br><br><br>
+				<a href="index.html">Powrot</a> <br>
+				
+				<p align=center><font size=5>													Napisz komentarz								</p></font>
+
+<form action="index.php" method="post">
+<input type="text" name="imie" value="imie" />
+<br /><input name="email" type="text" value="e-mail" />
+<br /><input name="www" type="text" value="http://" />
+<br /><textarea name="wpis" rows="3" cols="30">wpis</textarea>
+<br /><input type=submit value=" dodaj! " />
+</form>
+
+<?
+$ksiega = "ksiega.txt";
+
+$imie = stripslashes(htmlspecialchars($_POST["imie"], ENT_QUOTES));
+$email = stripslashes(htmlspecialchars($_POST["email"], ENT_QUOTES));
+$www = stripslashes(htmlspecialchars($_POST["www"], ENT_QUOTES));
+$wpis = stripslashes(htmlspecialchars($_POST["wpis"], ENT_QUOTES));
+
+if (strlen($wpis)>5) {
+  $f = fopen($ksiega, "a");
+  $rekord="`$imie`$email`$www`$wpis`";
+  $rekord = ereg_replace(10," ",$rekord);
+  $rekord = ereg_replace(13," ",$rekord);
+  fputs($f, "$rekord\n"); fclose($f);
+}
+
+$wpisy = file($ksiega);
+$wpisy = array_reverse($wpisy);
+$ile = count($wpisy);
+for ($i=0;$i<$ile;$i++) {
+  $wpis = explode("`",$wpisy[$i]);
+  echo "<p><b>$wpis[1]</b> ";
+  if ($wpis[2]<>"") echo "- <a href=\"mailto:$wpis[2]\">$wpis[2]</a>";
+  if ($wpis[3]<>"") echo "- <a href=\"$wpis[3]\"
+    target=\"_blank\">$wpis[3]</a>";
+  echo "<br>$wpis[4]<p>";
+}
+?>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				</body>
+		
+		
+			
+			
+			
+		</head>
+		
+</html>
+<! – ©Copyright Filip Szpinek –>
